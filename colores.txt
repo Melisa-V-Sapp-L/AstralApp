@@ -1,0 +1,94 @@
+#479b98 verde
+#f08a65 marron
+#614b72 uva
+#5383c0 celeste
+#5383c0 amarillo
+#f29c9a rosa
+#2c4163 azul
+
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Picker } from 'react-native';
+
+const App = () => {
+  const [selectedDay, setSelectedDay] = useState('');
+  const [selectedMonth, setSelectedMonth] = useState('');
+
+  // Lista de días y meses (simulación, puedes ajustar según necesites)
+  const days = Array.from(Array(31).keys()).map(day => String(day + 1));
+  const months = [
+    { label: 'Enero', value: 'Enero' },
+    { label: 'Febrero', value: 'Febrero' },
+    { label: 'Marzo', value: 'Marzo' },
+    { label: 'Abril', value: 'Abril' },
+    { label: 'Mayo', value: 'Mayo' },
+    { label: 'Junio', value: 'Junio' },
+    { label: 'Julio', value: 'Julio' },
+    { label: 'Agosto', value: 'Agosto' },
+    { label: 'Septiembre', value: 'Septiembre' },
+    { label: 'Octubre', value: 'Octubre' },
+    { label: 'Noviembre', value: 'Noviembre' },
+    { label: 'Diciembre', value: 'Diciembre' },
+  ];
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.label}>Selecciona el día y el mes:</Text>
+
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={selectedDay}
+          onValueChange={(itemValue, itemIndex) => setSelectedDay(itemValue)}
+          style={styles.picker}
+        >
+          <Picker.Item label="Día" value="" />
+          {days.map(day => (
+            <Picker.Item key={day} label={day} value={day} />
+          ))}
+        </Picker>
+
+        <Picker
+          selectedValue={selectedMonth}
+          onValueChange={(itemValue, itemIndex) => setSelectedMonth(itemValue)}
+          style={styles.picker}
+        >
+          <Picker.Item label="Mes" value="" />
+          {months.map(month => (
+            <Picker.Item key={month.value} label={month.label} value={month.value} />
+          ))}
+        </Picker>
+      </View>
+
+      <Text style={styles.selection}>
+        Selección: {selectedDay} {selectedMonth}
+      </Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
+  label: {
+    fontSize: 18,
+    marginBottom: 10,
+  },
+  pickerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  picker: {
+    flex: 1,
+    height: 50,
+  },
+  selection: {
+    fontSize: 16,
+    marginTop: 20,
+  },
+});
+
+export default App;
